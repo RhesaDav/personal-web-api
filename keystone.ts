@@ -22,6 +22,9 @@ export default withAuth(
     session,
     server: {
       port: parseInt(PORT),
+      cors : {
+        origin : true, credentials : true
+      }
     },
     storage: {
       my_images: {

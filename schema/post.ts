@@ -1,10 +1,7 @@
 import { list } from "@keystone-6/core";
 import { allowAll } from "@keystone-6/core/access";
 
-import {
-  text,
-  relationship,
-} from "@keystone-6/core/fields";
+import { text, timestamp } from "@keystone-6/core/fields";
 
 import { document } from "@keystone-6/fields-document";
 
@@ -24,31 +21,21 @@ const Post = list({
       links: true,
       dividers: true,
     }),
-    author: relationship({
-      ref: "User.posts",
-      ui: {
-        displayMode: "cards",
-        cardFields: ["name", "email"],
-        inlineEdit: { fields: ["name", "email"] },
-        linkToItem: true,
-        inlineConnect: true,
+    author: text(),
+    createdAt: timestamp({
+      defaultValue: {
+        kind: "now",
       },
-      many: false,
     }),
-    tags: relationship({
-      ref: "Tag.posts",
-      many: true,
-      ui: {
-        displayMode: "cards",
-        cardFields: ["name"],
-        inlineEdit: { fields: ["name"] },
-        linkToItem: true,
-        inlineConnect: true,
-        inlineCreate: { fields: ["name"] },
+    updatedAt: timestamp({
+      defaultValue: {
+        kind: "now",
+      },
+      db: {
+        updatedAt: true,
       },
     }),
   },
 });
 
-
-export default Post
+export default Post;

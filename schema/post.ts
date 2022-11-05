@@ -1,7 +1,7 @@
 import { list } from "@keystone-6/core";
 import { allowAll } from "@keystone-6/core/access";
 
-import { image, text, timestamp } from "@keystone-6/core/fields";
+import { file, image, text, timestamp } from "@keystone-6/core/fields";
 
 import { document } from "@keystone-6/fields-document";
 
@@ -24,6 +24,9 @@ const Post = list({
     author: text(),
     image : image({
         storage : 'my_images',
+    }),
+    video : file({
+        storage : "my_files"
     }),
     createdAt: timestamp({
       ui: {

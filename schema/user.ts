@@ -21,12 +21,19 @@ const User = list({
       defaultValue: { kind: "now" },
     }),
     updatedAt: timestamp({
-        defaultValue: { kind: "now" },
-        db : {
-            updatedAt : true
-        }
-      }),
+      defaultValue: { kind: "now" },
+      db: {
+        updatedAt: true,
+      },
+    }),
   },
+  ui : {
+    createView : {
+        defaultFieldMode : "hidden"
+    },
+    hideCreate : true,
+    hideDelete : true,
+  }
 });
 
 export default User;

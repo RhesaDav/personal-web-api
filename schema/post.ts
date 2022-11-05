@@ -23,7 +23,7 @@ const Post = list({
     }),
     author: text(),
     image : image({
-        storage : 'my_files',
+        storage : 'my_images',
     }),
     createdAt: timestamp({
       ui: {

@@ -54,12 +54,31 @@ var Post = (0, import_core.list)({
       dividers: true
     }),
     author: (0, import_fields.text)(),
+    image: (0, import_fields.image)({
+      storage: "my_images"
+    }),
     createdAt: (0, import_fields.timestamp)({
+      ui: {
+        createView: {
+          fieldMode: "hidden"
+        },
+        itemView: {
+          fieldMode: "read"
+        }
+      },
       defaultValue: {
         kind: "now"
       }
     }),
     updatedAt: (0, import_fields.timestamp)({
+      ui: {
+        createView: {
+          fieldMode: "hidden"
+        },
+        itemView: {
+          fieldMode: "read"
+        }
+      },
       defaultValue: {
         kind: "now"
       },
@@ -93,6 +112,13 @@ var User = (0, import_core2.list)({
         updatedAt: true
       }
     })
+  },
+  ui: {
+    createView: {
+      defaultFieldMode: "hidden"
+    },
+    hideCreate: true,
+    hideDelete: true
   }
 });
 var user_default = User;
@@ -142,7 +168,31 @@ var keystone_default = withAuth(
     lists,
     session,
     server: {
-      port: parseInt(PORT)
+      port: parseInt(PORT),
+      cors: {
+        origin: true,
+        credentials: true
+      }
+    },
+    storage: {
+      my_images: {
+        kind: "local",
+        type: "image",
+        generateUrl: (path) => `http://34.128.119.167:5000/images${path}`,
+        serverRoute: {
+          path: "/images"
+        },
+        storagePath: "public/images"
+      },
+      my_files: {
+        kind: "local",
+        type: "file",
+        generateUrl: (path) => `http://34.128.119.167:5000/files${path}`,
+        serverRoute: {
+          path: "/files"
+        },
+        storagePath: "public/files"
+      }
     }
   })
 );

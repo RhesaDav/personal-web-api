@@ -8,7 +8,6 @@ import {
   timestamp,
 } from "@keystone-6/core/fields";
 
-
 const User = list({
   access: allowAll,
   fields: {
@@ -18,12 +17,16 @@ const User = list({
       isIndexed: "unique",
     }),
     password: password({ validation: { isRequired: true } }),
-    posts: relationship({ ref: "Post.author", many: true }),
     createdAt: timestamp({
       defaultValue: { kind: "now" },
     }),
+    updatedAt: timestamp({
+        defaultValue: { kind: "now" },
+        db : {
+            updatedAt : true
+        }
+      }),
   },
 });
 
-
-export default User
+export default User;

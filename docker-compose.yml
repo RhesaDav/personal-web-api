@@ -1,0 +1,9 @@
+version: "3.3"
+services: 
+    dashboard-api:
+      image: dashboard-api:latest
+      container_name: dashboard-api
+      ports:
+        - '5000:5000'
+      valumes:
+        - ./env:/app/.env
